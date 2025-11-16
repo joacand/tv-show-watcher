@@ -8,6 +8,9 @@ import {
 import { SetStateAction, useEffect, useMemo, useState } from 'react';
 import { searchTvShow } from '../services/TvMaze/api';
 import TvSearch from '../interfaces/tvSearch';
+import PrimaryButton from '../components/PrimaryButton';
+import TextArea from '../components/TextArea';
+import ShowStorage from '../interfaces/showStorage';
 
 export default function SearchGrid({ className = "", children }: { className?: string, children?: React.ReactNode }) {
     const [search, setSearch] = useState<string>("");
@@ -52,24 +55,32 @@ export default function SearchGrid({ className = "", children }: { className?: s
     };
 
     const handleAdd = async () => {
-        table.getSelectedRowModel().flatRows.map((row) => {
-            console.log('adding ' + row.getValue('id'));
+        const existingJson = localStorage.getItem("shows");
+        const showStorage: ShowStorage = existingJson ? JSON.parse(existingJson) : { showIds: [] }
 
-            const existing = localStorage.getItem("shows");
-            if (existing && existing.split(',').includes(row.getValue('id'))) {
-                console.log('show already exists in storage');
+        table.getSelectedRowModel().flatRows.map((row) => {
+            const id = row.getValue<string>("id");
+
+            if (showStorage.showIds.includes(id)) {
+                console.log(`show ${id} already exists in storage`);
             } else {
-                localStorage.setItem("shows", existing ? existing + "," + row.getValue('id') : row.getValue('id'));
+                showStorage.showIds.push(id);
+                console.log(`adding ${id}`);
             }
+
+            localStorage.setItem("shows", JSON.stringify(showStorage));
+            table.resetRowSelection();
         });
     };
 
     return (
-        <>
-            <textarea value={search} onChange={handleChange} />
-            <button onClick={handleSearch}>Search</button>
+        <div className='flex flex-col gap-4 '>
+            <div className='flex gap-4'>
+                <TextArea value={search} onChange={handleChange} />
+                <PrimaryButton onClick={handleSearch}>Search</PrimaryButton>
+            </div>
             <MaterialReactTable table={table} />
-            <button onClick={handleAdd}>Add</button>
-        </>
+            <PrimaryButton className="self-start" onClick={handleAdd}>Add</PrimaryButton>
+        </div>
     );
 }

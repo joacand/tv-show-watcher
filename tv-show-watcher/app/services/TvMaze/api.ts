@@ -10,12 +10,30 @@ async function MapToTvShow(json: Show): Promise<TvShow> {
     const nextEpisodeLink = json._links.nextepisode?.href;
     const nextEpisode = nextEpisodeLink ? await getEpisode(nextEpisodeLink!) : null;
 
+    const previousEpisodeDate = previousEpisode ? previousEpisode.airdate : null;
+    let diffDays = "N/A";
+    if (previousEpisodeDate) {
+        const prevDate = new Date(previousEpisodeDate);
+        const today = new Date();
+        const diffTime = Math.abs(prevDate.getTime() - today.getTime());
+        diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)).toString() + " days ago";
+    }
+
+    const nextEpisodeDate = nextEpisode ? nextEpisode.airdate : null;
+    let nextDiffDays = "N/A";
+    if (nextEpisodeDate) {
+        const nextDate = new Date(nextEpisodeDate);
+        const today = new Date();
+        const diffTime = Math.abs(nextDate.getTime() - today.getTime());
+        nextDiffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)).toString() + " days";
+    }
 
     return {
+        id: json.id,
         show: json.name,
-        episode: previousEpisode ? `S${previousEpisode.season}E${previousEpisode.number}` : "N/A",
-        latestEpisode: previousEpisode ? previousEpisode.airdate : "N/A",
-        nextEpisode: nextEpisode ? nextEpisode.airdate : "N/A",
+        episode: previousEpisode ? `S${String(previousEpisode.season).padStart(2, '0')}E${String(previousEpisode.number ? previousEpisode.number : "").padStart(2, '0')}` : "N/A",
+        latestEpisode: diffDays,
+        nextEpisode: nextDiffDays,
     };
 }
 

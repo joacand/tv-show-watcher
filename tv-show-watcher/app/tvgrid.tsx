@@ -8,21 +8,23 @@ import {
 import { useEffect, useMemo, useState } from 'react';
 import { getTvShow } from './services/TvMaze/api';
 import TvShow from './interfaces/tvShow';
+import ShowStorage from './interfaces/showStorage';
 
 export default function TvGrid({ className = "", children }: { className?: string, children?: React.ReactNode }) {
 
     const [tvShows, setTvShows] = useState<TvShow[]>([]);
 
-    const [shows, setShows] = useState(() => {
-        const storedShows = localStorage.getItem("shows");
-        return storedShows ? storedShows.split(',') : [];
+    const [showStorage, _] = useState(() => {
+        const existingJson = localStorage.getItem("shows");
+        const showStorage: ShowStorage = existingJson ? JSON.parse(existingJson) : { showIds: [] }
+        return showStorage;
     });
 
     useEffect(() => {
-        Promise.all(shows.map(showId => getTvShow(showId)))
+        Promise.all(showStorage.showIds.map(showId => getTvShow(showId)))
             .then(fetchedShows => setTvShows(fetchedShows))
             .catch(error => console.error(error));
-    }, [shows]);
+    }, [showStorage]);
 
     const columns = useMemo<MRT_ColumnDef<TvShow>[]>(
         () => [
