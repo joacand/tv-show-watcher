@@ -11,6 +11,7 @@ import TvSearch from '../interfaces/tvSearch';
 import PrimaryButton from '../components/PrimaryButton';
 import TextArea from '../components/TextArea';
 import ShowStorage from '../interfaces/showStorage';
+import Image from 'next/image';
 
 export default function SearchGrid({ className = "", children }: { className?: string, children?: React.ReactNode }) {
     const [search, setSearch] = useState<string>("");
@@ -21,18 +22,23 @@ export default function SearchGrid({ className = "", children }: { className?: s
             {
                 accessorKey: 'id',
                 header: 'Id',
-                muiTableHeadCellProps: { style: { color: 'green' } },
+                muiTableHeadCellProps: { style: { color: '#3B4856' } },
             },
             {
                 accessorKey: 'name',
                 header: 'Name',
-                muiTableHeadCellProps: { style: { color: 'green' } },
+                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableHiding: false,
             },
             {
-                accessorKey: 'image',
+                accessorKey: 'imageUrl',
                 header: 'Image',
-                muiTableHeadCellProps: { style: { color: 'green' } },
+                muiTableHeadCellProps: { style: { color: '#3B4856' } },
+                Cell: ({ cell }) => (cell.getValue<string>() &&
+                    <div className='relative w-[105px] h-[148px]'>
+                         <Image src={cell.getValue<string>()} alt="Show Image" fill />
+                    </div>
+                ),
             },
         ],
         [],
@@ -44,6 +50,9 @@ export default function SearchGrid({ className = "", children }: { className?: s
         enableRowSelection: true,
         enableColumnOrdering: true,
         enableGlobalFilter: true,
+        initialState: {
+            columnVisibility: { id: false }
+        }
     });
 
     const handleChange = (event: { target: { value: SetStateAction<string>; }; }) => {
@@ -75,10 +84,20 @@ export default function SearchGrid({ className = "", children }: { className?: s
 
     return (
         <div className='flex flex-col gap-4 '>
-            <div className='flex gap-4'>
-                <TextArea value={search} onChange={handleChange} />
+            <form className='flex gap-4'
+                onSubmit={(e) => {
+                    e.preventDefault();
+                    handleSearch();
+                }}>
+                <TextArea value={search} onChange={handleChange}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter") {
+                            e.preventDefault();
+                            handleSearch();
+                        }
+                    }} />
                 <PrimaryButton onClick={handleSearch}>Search</PrimaryButton>
-            </div>
+            </form>
             <MaterialReactTable table={table} />
             <PrimaryButton className="self-start" onClick={handleAdd}>Add</PrimaryButton>
         </div>

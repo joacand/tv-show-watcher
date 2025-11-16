@@ -1,6 +1,6 @@
 "use client";
 
-import TvGrid from "./tvgrid";
+import TvGrid from "./TvGrid";
 
 export default function Home() {
   return (

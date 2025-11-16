@@ -1,4 +1,4 @@
-import SidebarLink from "./sidebarLink";
+import SideBarLink from "./SideBarLink";
 
 export default function SideBar({ className = "", children }: { className?: string, children?: React.ReactNode }) {
     return (
@@ -11,9 +11,9 @@ export default function SideBar({ className = "", children }: { className?: stri
                 flex-grow-0
                 ${className}
             `}>
-            <SidebarLink href="/">Home</SidebarLink>
-            <SidebarLink href="/modify">Modify TV Shows</SidebarLink>
-            <SidebarLink href="/about">About</SidebarLink>
+            <SideBarLink href="/">Home</SideBarLink>
+            <SideBarLink href="/search">Search TV Shows</SideBarLink>
+            <SideBarLink href="/about">About</SideBarLink>
             {children}
         </aside>
     )

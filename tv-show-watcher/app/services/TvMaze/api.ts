@@ -11,21 +11,21 @@ async function MapToTvShow(json: Show): Promise<TvShow> {
     const nextEpisode = nextEpisodeLink ? await getEpisode(nextEpisodeLink!) : null;
 
     const previousEpisodeDate = previousEpisode ? previousEpisode.airdate : null;
-    let diffDays = "N/A";
+    let diffDays = -99999;
     if (previousEpisodeDate) {
         const prevDate = new Date(previousEpisodeDate);
         const today = new Date();
         const diffTime = Math.abs(prevDate.getTime() - today.getTime());
-        diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)).toString() + " days ago";
+        diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     }
 
     const nextEpisodeDate = nextEpisode ? nextEpisode.airdate : null;
-    let nextDiffDays = "N/A";
+    let nextDiffDays = -99999;
     if (nextEpisodeDate) {
         const nextDate = new Date(nextEpisodeDate);
         const today = new Date();
         const diffTime = Math.abs(nextDate.getTime() - today.getTime());
-        nextDiffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)).toString() + " days";
+        nextDiffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     }
 
     return {
@@ -65,5 +65,5 @@ export async function searchTvShow(search: string): Promise<TvSearch[]> {
     if (!response.ok) { throw new Error('Failed to fetch TV shows'); }
     const rawResponse = await response.json();
 
-    return rawResponse.map(MapToTvSearch);
+    return rawResponse.slice(0,3).map(MapToTvSearch);
 }
