@@ -53,7 +53,7 @@ const importConfiguration = () => {
 export default function About() {
     return (
         <>
-            <div className="font-sans font-medium text-[16px] leading-[26px] text-black flex-none order-1 gap-4 flex flex-col">
+            <div className="font-sans font-medium text-[16px] leading-[26px] text-slate-50 flex-none order-1 gap-4 flex flex-col">
                 <p>API provided by <a href="https://www.tvmaze.com/api">TV Maze</a>.</p>
                 <p>You can use the below buttons to export or import a configuration.</p>
                 <div className="gap-4 flex">

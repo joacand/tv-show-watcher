@@ -40,22 +40,26 @@ export default function TvGrid({ className = "", children }: { className?: strin
                 header: 'Id',
                 muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableHiding: false,
+                enableColumnDragging: false,
             },
             {
                 accessorKey: 'show',
                 header: 'Show',
                 muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableHiding: false,
+                enableColumnDragging: false,
             },
             {
                 accessorKey: 'episode',
                 header: 'Episode',
                 muiTableHeadCellProps: { style: { color: '#3B4856' } },
+                enableColumnDragging: false,
             },
             {
                 accessorKey: 'latestEpisode',
                 header: 'Latest Episode',
                 muiTableHeadCellProps: { style: { color: '#3B4856' } },
+                enableColumnDragging: false,
                 Cell: ({ cell }) => (
                     <span>
                         {cell.getValue<number>() === -99999 ? "N/A" : `${cell.getValue<number>()} day${cell.getValue<number>() === 1 ? "" : "s"} ago`}
@@ -66,6 +70,7 @@ export default function TvGrid({ className = "", children }: { className?: strin
                 accessorKey: 'nextEpisode',
                 header: 'Next Episode',
                 muiTableHeadCellProps: { style: { color: '#3B4856' } },
+                enableColumnDragging: false,
                 Cell: ({ cell }) => (
                     <span>
                         {cell.getValue<number>() === -99999 ? "N/A" : `${cell.getValue<number>()} day${cell.getValue<number>() === 1 ? "" : "s"}`}

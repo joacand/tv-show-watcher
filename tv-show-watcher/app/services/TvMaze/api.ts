@@ -2,6 +2,44 @@ import TvSearch from "@/app/interfaces/tvSearch";
 import TvShow from "../../interfaces/tvShow";
 import { EpisodeResponse, Show, ShowResponse } from "./models";
 
+async function sleep(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function shouldRetryStatus(status: number) {
+    return status === 429 || status >= 500;
+}
+
+async function fetchWithRetries(url: string, options: RequestInit | undefined = undefined, attempts = 3, baseDelayMs = 500, timeoutMs = 5000): Promise<Response> {
+    for (let attempt = 0; attempt < attempts; attempt++) {
+        const controller = new AbortController();
+        const id = setTimeout(() => controller.abort(), timeoutMs);
+        try {
+            const resp = await fetch(url, { ...options, signal: controller.signal });
+            clearTimeout(id);
+
+            if (resp.ok) return resp;
+
+            const jitter = Math.random() * 100;
+            const delay = baseDelayMs * Math.pow(2, attempt) + jitter;
+            await sleep(delay);
+        } catch  {
+            clearTimeout(id);
+
+            if (attempt < attempts - 1) {
+                const jitter = Math.random() * 100;
+                const delay = baseDelayMs * Math.pow(2, attempt) + jitter;
+                await sleep(delay);
+                continue;
+            }
+
+            throw new Error("All fetch attempts failed");;
+        }
+    }
+
+    throw new Error("All fetch attempts failed");
+}
+
 async function MapToTvShow(json: Show): Promise<TvShow> {
 
     const previousEpisodeLink = json._links.previousepisode?.href;
@@ -46,14 +84,14 @@ function MapToTvSearch(json: ShowResponse): TvSearch {
 }
 
 async function getEpisode(episodeHref: string): Promise<EpisodeResponse> {
-    const response = await fetch(episodeHref);
+    const response = await fetchWithRetries(episodeHref);
     if (!response.ok) { throw new Error('Failed to fetch episode'); }
     return await response.json() as EpisodeResponse;
 }
 
 export async function getTvShow(showId: string): Promise<TvShow> {
     console.log('fetching show ' + showId);
-    const response = await fetch(`http://api.tvmaze.com/shows/${showId}`);
+    const response = await fetchWithRetries(`http://api.tvmaze.com/shows/${showId}`);
     if (!response.ok) { throw new Error('Failed to fetch TV shows'); }
     const rawResponse = await response.json();
 
@@ -61,9 +99,9 @@ export async function getTvShow(showId: string): Promise<TvShow> {
 }
 
 export async function searchTvShow(search: string): Promise<TvSearch[]> {
-    const response = await fetch(`http://api.tvmaze.com/search/shows?q=${search}`);
+    const response = await fetchWithRetries(`http://api.tvmaze.com/search/shows?q=${search}`);
     if (!response.ok) { throw new Error('Failed to fetch TV shows'); }
     const rawResponse = await response.json();
 
-    return rawResponse.slice(0,3).map(MapToTvSearch);
+    return rawResponse.slice(0, 3).map(MapToTvSearch);
 }

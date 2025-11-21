@@ -33,7 +33,7 @@ export default function RootLayout({
             flex flex-col items-stretch
             p-[10px] gap-[10px] w-full h-screen
             relative
-            bg-white">
+            bg-gray-700">
           <Header />
           <div className="flex flex-1 w-full">
             <SideBar className="" />

@@ -7,10 +7,10 @@ const PrimaryButton: React.FC<PrimaryButtonProps> = ({ children, ...props }) => 
         <button
             {...props}
             className={`
-                    bg-[#3B4856] rounded-[10px] font-sans font-medium
+                    bg-blue-500 rounded-[10px] font-sans font-medium
                     flex justify-center items-center
                     text-[#F5F5F5] p-3
-                    hover:bg-[#2f3b45] active:bg-[#262f36]
+                    hover:bg-blue-400 active:bg-blue-400
                     cursor-pointer
                 ${props.className ?? ""}
             `}

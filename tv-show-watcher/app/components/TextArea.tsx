@@ -7,10 +7,10 @@ const TextArea: React.FC<TextAreaProps> = ({ children, ...props }) => {
         <textarea
             {...props}
             className={`
-                bg-[#3B4856] 
+                bg-gray-600
                 rounded-[10px] 
                 font-sans font-medium
-                text-[#F5F5F5] text-[20px] leading-[26px]
+                text-slate-50 text-[20px] leading-[26px]
                 h-[50px] px-2 py-3
                 hover:bg-[#2f3b45] active:bg-[#262f36]
                 ${props.className ?? ""}
