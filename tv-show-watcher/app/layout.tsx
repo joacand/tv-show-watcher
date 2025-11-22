@@ -10,7 +10,6 @@ import '@fontsource/roboto/700.css';
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
 import darkTheme from "./theme";
-import ModeSwitch from "./components/ModeSwitch";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

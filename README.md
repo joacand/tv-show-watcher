@@ -1,26 +1,38 @@
-# Tv Show Watcher
-An application that allows users to subscribe to their favorite TV shows and see latest and upcoming episodes.
+# 📺 Tv Show Watcher
+Tv Show Watcher is a web application that allows users to subscribe to their favorite TV shows, track upcoming episodes, and stay up-to-date with the latest releases.
 
-# Build and Deploy
+Built with React, Next.js, and Material UI.
 
-To run development server:
+## Tech Stack
+- React
+- Next.js
+- Material UI (MUI)
+
+## Build and Deploy
+
+Install dependencies:
+```bash
+npm install
+```
+
+Run development server:
 
 ```bash
 npm run dev
 ```
 
-To build the application for static site hosting:
+Build the application for static hosting:
 ```bash
 npm run build
 ```
 
-Serve the `out` directory to any static file server.
+Serve the `out` directory with any static file server.
 
-## Environment Configuration
-By default it builds the application using root base path `/`. If you want to host it on a subpage you need to add `.env` file with the following contents:
+### Environment Configuration
+By default, the app builds using the root base path `/`. To host on a subpath, create a `.env` file with:
 ```
 BASE_PATH="/sub-path"
 ASSET_PREFIX="/sub-path"
 ```
 
-It is possible to have `.env.development.local` and other environments for local development.
+You can also have environment-specific files such as `.env.development.local` for local development.
