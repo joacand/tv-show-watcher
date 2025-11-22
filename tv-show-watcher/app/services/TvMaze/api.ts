@@ -6,10 +6,6 @@ async function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-function shouldRetryStatus(status: number) {
-    return status === 429 || status >= 500;
-}
-
 async function fetchWithRetries(url: string, options: RequestInit | undefined = undefined, attempts = 3, baseDelayMs = 500, timeoutMs = 5000): Promise<Response> {
     for (let attempt = 0; attempt < attempts; attempt++) {
         const controller = new AbortController();
@@ -91,7 +87,7 @@ async function getEpisode(episodeHref: string): Promise<EpisodeResponse> {
 
 export async function getTvShow(showId: string): Promise<TvShow> {
     console.log('fetching show ' + showId);
-    const response = await fetchWithRetries(`http://api.tvmaze.com/shows/${showId}`);
+    const response = await fetchWithRetries(`https://api.tvmaze.com/shows/${showId}`);
     if (!response.ok) { throw new Error('Failed to fetch TV shows'); }
     const rawResponse = await response.json();
 
@@ -99,7 +95,7 @@ export async function getTvShow(showId: string): Promise<TvShow> {
 }
 
 export async function searchTvShow(search: string): Promise<TvSearch[]> {
-    const response = await fetchWithRetries(`http://api.tvmaze.com/search/shows?q=${search}`);
+    const response = await fetchWithRetries(`https://api.tvmaze.com/search/shows?q=${search}`);
     if (!response.ok) { throw new Error('Failed to fetch TV shows'); }
     const rawResponse = await response.json();
 
