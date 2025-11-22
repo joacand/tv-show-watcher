@@ -3,6 +3,14 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "./Header";
 import SideBar from "./SideBar";
+import '@fontsource/roboto/300.css';
+import '@fontsource/roboto/400.css';
+import '@fontsource/roboto/500.css';
+import '@fontsource/roboto/700.css';
+import CssBaseline from "@mui/material/CssBaseline";
+import { ThemeProvider } from "@mui/material/styles";
+import darkTheme from "./theme";
+import ModeSwitch from "./components/ModeSwitch";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,23 +33,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning
       >
-        <div className="
+        <ThemeProvider theme={darkTheme}>
+          <CssBaseline />
+          <div className="
             flex flex-col items-stretch
-            p-[10px] gap-[10px] w-full h-screen
-            relative
-            bg-gray-700">
-          <Header />
-          <div className="flex flex-1 w-full">
-            <SideBar className="" />
-            <main className="flex-1 p-6">
-              {children}
-            </main>
+            p-[10px] w-full h-screen
+            relative">
+            <Header />
+            <div className="flex flex-1 w-full">
+              <SideBar className="" />
+              <main className="flex-1 p-6 max-w-300">
+                {children}
+              </main>
+            </div>
           </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );

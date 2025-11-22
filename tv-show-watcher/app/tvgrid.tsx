@@ -10,7 +10,6 @@ import { getTvShow } from './services/TvMaze/api';
 import TvShow from './interfaces/tvShow';
 import ShowStorage from './interfaces/showStorage';
 import PrimaryButton from './components/PrimaryButton';
-import { Paper } from '@mui/material';
 import InfoText from './components/InfoText';
 
 export default function TvGrid({ className = "", children }: { className?: string, children?: React.ReactNode }) {
@@ -39,44 +38,43 @@ export default function TvGrid({ className = "", children }: { className?: strin
             {
                 accessorKey: 'id',
                 header: 'Id',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableHiding: false,
                 enableColumnDragging: false,
             },
             {
                 accessorKey: 'show',
                 header: 'Show',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableHiding: false,
                 enableColumnDragging: false,
+                grow: true,
             },
             {
                 accessorKey: 'episode',
                 header: 'Episode',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableColumnDragging: false,
+                grow: false,
             },
             {
                 accessorKey: 'latestEpisode',
                 header: 'Latest Episode',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableColumnDragging: false,
                 Cell: ({ cell }) => (
                     <span>
                         {cell.getValue<number>() === -99999 ? "N/A" : `${cell.getValue<number>()} day${cell.getValue<number>() === 1 ? "" : "s"} ago`}
                     </span>
                 ),
+                grow: false,
             },
             {
                 accessorKey: 'nextEpisode',
                 header: 'Next Episode',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableColumnDragging: false,
                 Cell: ({ cell }) => (
                     <span>
                         {cell.getValue<number>() === -99999 ? "N/A" : `${cell.getValue<number>()} day${cell.getValue<number>() === 1 ? "" : "s"}`}
                     </span>
                 ),
+                grow: false,
             },
         ],
         [],
@@ -108,13 +106,21 @@ export default function TvGrid({ className = "", children }: { className?: strin
         data: tvShows,
         enableRowSelection: true,
         enableColumnOrdering: true,
-        enableGlobalFilter: true,
+        enableColumnActions: false,
+        enableGlobalFilter: false,
+        enableKeyboardShortcuts: false,
+        enableColumnFilters: false,
+        enableTopToolbar: false,
+        paginationDisplayMode: 'pages',
+        layoutMode: 'grid',
         initialState: {
             sorting: [
                 { id: 'latestEpisode', desc: false },
             ],
+            pagination: { pageSize: 15, pageIndex: 0 },                        
+            density: 'comfortable',
             columnVisibility: { id: false }
-        }
+        },
     });
 
     return (

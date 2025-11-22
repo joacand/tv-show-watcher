@@ -22,18 +22,15 @@ export default function SearchGrid({ className = "", children }: { className?: s
             {
                 accessorKey: 'id',
                 header: 'Id',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
             },
             {
                 accessorKey: 'name',
                 header: 'Name',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 enableHiding: false,
             },
             {
                 accessorKey: 'imageUrl',
                 header: 'Image',
-                muiTableHeadCellProps: { style: { color: '#3B4856' } },
                 Cell: ({ cell }) => (cell.getValue<string>() &&
                     <div className='relative w-[105px] h-[148px]'>
                          <Image src={cell.getValue<string>()} alt="Show Image" fill />
@@ -89,7 +86,7 @@ export default function SearchGrid({ className = "", children }: { className?: s
                     e.preventDefault();
                     handleSearch();
                 }}>
-                <TextArea value={search} onChange={handleChange}
+                <TextArea autoFocus placeholder="Enter TV Show..." value={search} onChange={handleChange}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
                             e.preventDefault();

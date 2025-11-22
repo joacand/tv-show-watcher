@@ -1,5 +1,6 @@
 "use client";
 
+import Href from "../components/Href";
 import PrimaryButton from "../components/PrimaryButton";
 
 const exportConfiguration = () => {
@@ -53,9 +54,11 @@ const importConfiguration = () => {
 export default function About() {
     return (
         <>
-            <div className="font-sans font-medium text-[16px] leading-[26px] text-slate-50 flex-none order-1 gap-4 flex flex-col">
-                <p>API provided by <a href="https://www.tvmaze.com/api">TV Maze</a>.</p>
-                <p>You can use the below buttons to export or import a configuration.</p>
+            <div className="font-sans font-medium text-[16px] leading-[26px] flex-none order-1 gap-4 flex flex-col">
+                <p>Welcome to <strong>TV Show Watcher</strong>!</p>
+                <p>With this application you can see upcoming episodes of your favorite TV shows in one place. Simply add the shows you like in <Href href="/search">Search</Href> and then navigate to the <Href href="/">Home page</Href>.</p>
+                <p>API provided by <Href href="https://www.tvmaze.com/api">TV Maze</Href>.</p>
+                <p>You can use the below buttons to export or import your TV shows:</p>
                 <div className="gap-4 flex">
                     <PrimaryButton className="self-start" onClick={exportConfiguration}>Export</PrimaryButton>
                     <PrimaryButton className="self-start" onClick={importConfiguration}>Import</PrimaryButton>

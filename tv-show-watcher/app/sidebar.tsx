@@ -7,12 +7,11 @@ export default function SideBar({ className = "", children }: { className?: stri
                 py-[20px] px-[30px]
                 gap-[30px]
                 w-[226px] h-full
-                bg-gray-600
                 flex-grow-0
                 ${className}
             `}>
             <SideBarLink href="/">Home</SideBarLink>
-            <SideBarLink href="/search">Search TV Shows</SideBarLink>
+            <SideBarLink href="/search">Add TV Show</SideBarLink>
             <SideBarLink href="/about">About</SideBarLink>
             {children}
         </aside>
