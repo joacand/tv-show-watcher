@@ -17,15 +17,16 @@ export default function TvGrid({ className = "", children }: { className?: strin
 
     const [tvShows, setTvShows] = useState<TvShow[]>([]);
     const [showIntroText, setShowIntroText] = useState(false);
+    const [showStorage, setStorage] = useState<ShowStorage>({ showIds: [] });
 
-    const [showStorage, setStorage] = useState(() => {
+    useEffect(() => {
         const existingJson = localStorage.getItem("shows");
         if (!existingJson) { setShowIntroText(true); }
         const showStorage: ShowStorage = existingJson
             ? JSON.parse(existingJson)
             : { showIds: [28276, 347, 305, 44933] }
-        return showStorage;
-    });
+        setStorage(showStorage);
+    }, []);
 
     useEffect(() => {
         Promise.all(showStorage.showIds.map(showId => getTvShow(showId)))
