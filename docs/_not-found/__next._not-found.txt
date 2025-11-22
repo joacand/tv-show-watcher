@@ -1,4 +1,4 @@
 1:"$Sreact.fragment"
-2:I[39756,["/TvShowWatcher/_next/static/chunks/ff1a16fafef87110.js","/TvShowWatcher/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-3:I[37457,["/TvShowWatcher/_next/static/chunks/ff1a16fafef87110.js","/TvShowWatcher/_next/static/chunks/247eb132b7f7b574.js"],"default"]
-0:{"buildId":"XfoGEMOhzAgKiFULE1elR","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
+2:I[39756,["/tv-show-watcher/_next/static/chunks/ff1a16fafef87110.js","/tv-show-watcher/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+3:I[37457,["/tv-show-watcher/_next/static/chunks/ff1a16fafef87110.js","/tv-show-watcher/_next/static/chunks/247eb132b7f7b574.js"],"default"]
+0:{"buildId":"lLzo4dQ6_c3-aideDFkcL","rsc":["$","$1","c",{"children":[null,["$","$L2",null,{"parallelRouterKey":"children","template":["$","$L3",null,{}]}]]}],"loading":null,"isPartial":false}
