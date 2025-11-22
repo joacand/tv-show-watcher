@@ -36,3 +36,6 @@ ASSET_PREFIX="/sub-path"
 ```
 
 You can also have environment-specific files such as `.env.development.local` for local development.
+
+## Live Demo
+You can see the application in action [here](https://joacimandersson.com/tv-show-watcher/).

@@ -6,9 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint",
-    "move-docs": "node moveOutToDocs.js",
-    "build:docs": "npm run build && npm run move-docs"
+    "lint": "eslint"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
