@@ -19,7 +19,7 @@ async function fetchWithRetries(url: string, options: RequestInit | undefined = 
             const jitter = Math.random() * 100;
             const delay = baseDelayMs * Math.pow(2, attempt) + jitter;
             await sleep(delay);
-        } catch  {
+        } catch {
             clearTimeout(id);
 
             if (attempt < attempts - 1) {
@@ -86,7 +86,6 @@ async function getEpisode(episodeHref: string): Promise<EpisodeResponse> {
 }
 
 export async function getTvShow(showId: string): Promise<TvShow> {
-    console.log('fetching show ' + showId);
     const response = await fetchWithRetries(`https://api.tvmaze.com/shows/${showId}`);
     if (!response.ok) { throw new Error('Failed to fetch TV shows'); }
     const rawResponse = await response.json();

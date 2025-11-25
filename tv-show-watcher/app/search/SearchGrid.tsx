@@ -33,7 +33,7 @@ export default function SearchGrid({ className = "", children }: { className?: s
                 header: 'Image',
                 Cell: ({ cell }) => (cell.getValue<string>() &&
                     <div className='relative w-[105px] h-[148px]'>
-                         <Image src={cell.getValue<string>()} alt="Show Image" fill />
+                        <Image src={cell.getValue<string>()} alt="Show Image" fill />
                     </div>
                 ),
             },
@@ -68,10 +68,9 @@ export default function SearchGrid({ className = "", children }: { className?: s
             const id = row.getValue<string>("id");
 
             if (showStorage.showIds.includes(id)) {
-                console.log(`show ${id} already exists in storage`);
+                console.log(`Show ${id} already exists in storage`);
             } else {
                 showStorage.showIds.push(id);
-                console.log(`adding ${id}`);
             }
 
             localStorage.setItem("shows", JSON.stringify(showStorage));

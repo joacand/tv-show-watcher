@@ -11,12 +11,14 @@ import TvShow from './interfaces/tvShow';
 import ShowStorage from './interfaces/showStorage';
 import PrimaryButton from './components/PrimaryButton';
 import InfoText from './components/InfoText';
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function TvGrid({ className = "", children }: { className?: string, children?: React.ReactNode }) {
 
     const [tvShows, setTvShows] = useState<TvShow[]>([]);
     const [showIntroText, setShowIntroText] = useState(false);
     const [showStorage, setStorage] = useState<ShowStorage>({ showIds: [] });
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         const existingJson = localStorage.getItem("shows");
@@ -28,9 +30,14 @@ export default function TvGrid({ className = "", children }: { className?: strin
     }, []);
 
     useEffect(() => {
-        Promise.all(showStorage.showIds.map(showId => getTvShow(showId)))
-            .then(fetchedShows => setTvShows(fetchedShows))
-            .catch(error => console.error(error));
+        try {
+            Promise.all(showStorage.showIds.map(showId => getTvShow(showId)))
+                .then(fetchedShows => setTvShows(fetchedShows))
+                .catch(error => console.error(error));
+        } catch (error) {
+            console.error(error);
+        }
+        setIsLoading(false);
     }, [showStorage]);
 
     const columns = useMemo<MRT_ColumnDef<TvShow>[]>(
@@ -91,7 +98,6 @@ export default function TvGrid({ className = "", children }: { className?: strin
                 const index = showStorage.showIds.indexOf(id);
                 if (index !== -1) {
                     showStorage.showIds.splice(index, 1);
-                    console.log(`removing ${id}`);
                 }
             }
 
@@ -117,7 +123,7 @@ export default function TvGrid({ className = "", children }: { className?: strin
             sorting: [
                 { id: 'latestEpisode', desc: false },
             ],
-            pagination: { pageSize: 15, pageIndex: 0 },                        
+            pagination: { pageSize: 15, pageIndex: 0 },
             density: 'comfortable',
             columnVisibility: { id: false }
         },
@@ -125,7 +131,9 @@ export default function TvGrid({ className = "", children }: { className?: strin
 
     return (
         <div className='flex flex-col gap-4'>
-            <MaterialReactTable table={table} />
+            {isLoading ? <><CircularProgress /><p>Loading...</p> </> :
+                <MaterialReactTable table={table} />
+            }
             <PrimaryButton className="self-start" onClick={handleRemove}>Remove</PrimaryButton>
             {showIntroText && <InfoText>
                 Since this is your first visit, some sample shows have been added. These will be removed when you add your first show in &apos;<b>Search for TV Shows</b>&apos;.
