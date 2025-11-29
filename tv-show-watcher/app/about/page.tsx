@@ -2,6 +2,8 @@
 
 import Href from "../components/Href";
 import PrimaryButton from "../components/PrimaryButton";
+import FileDownloadIcon from '@mui/icons-material/FileDownload';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 const exportConfiguration = () => {
     const existingJson = localStorage.getItem("shows");
@@ -60,8 +62,8 @@ export default function About() {
                 <p>API provided by <Href href="https://www.tvmaze.com/api">TV Maze</Href>.</p>
                 <p>You can use the below buttons to export or import your TV shows:</p>
                 <div className="gap-4 flex">
-                    <PrimaryButton className="self-start" onClick={exportConfiguration}>Export</PrimaryButton>
-                    <PrimaryButton className="self-start" onClick={importConfiguration}>Import</PrimaryButton>
+                    <PrimaryButton className="self-start gap-2" onClick={exportConfiguration}><FileDownloadIcon/> Export</PrimaryButton>
+                    <PrimaryButton className="self-start gap-2" onClick={importConfiguration}><FileUploadIcon/> Import</PrimaryButton>
                 </div>
             </div>
         </>

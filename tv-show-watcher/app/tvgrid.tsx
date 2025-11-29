@@ -12,6 +12,7 @@ import ShowStorage from './interfaces/showStorage';
 import PrimaryButton from './components/PrimaryButton';
 import InfoText from './components/InfoText';
 import CircularProgress from '@mui/material/CircularProgress';
+import DeleteIcon from '@mui/icons-material/Delete';
 
 export default function TvGrid({ className = "", children }: { className?: string, children?: React.ReactNode }) {
 
@@ -130,7 +131,7 @@ export default function TvGrid({ className = "", children }: { className?: strin
             {isLoading ? <><CircularProgress /><p>Loading...</p> </> :
                 <MaterialReactTable table={table} />
             }
-            <PrimaryButton className="self-start" onClick={handleRemove}>Remove</PrimaryButton>
+            <PrimaryButton className="self-start gap-2" onClick={handleRemove} disabled={table.getSelectedRowModel().rows.length === 0}><DeleteIcon/> Remove</PrimaryButton>
             {showIntroText && <InfoText>
                 Since this is your first visit, some sample shows have been added. These will be removed when you add your first show in &apos;<b>Search for TV Shows</b>&apos;.
             </InfoText>}

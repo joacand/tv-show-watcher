@@ -13,7 +13,7 @@ export default function Header({ className = "", children }: { className?: strin
                     height: 'auto',
                     filter: 'drop-shadow(0 0 1px white) drop-shadow(0 0 1px white)',
                 }} />
-            <h1 className="font-sans font-medium text-[36px] leading-[46px]">TV Show Watcher</h1>
+            <h1 className="font-sans font-medium text-[52px] leading-[46px]">TV Show Watcher</h1>
         </header>
     )
 }
