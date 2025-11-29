@@ -30,14 +30,10 @@ export default function TvGrid({ className = "", children }: { className?: strin
     }, []);
 
     useEffect(() => {
-        try {
-            Promise.all(showStorage.showIds.map(showId => getTvShow(showId)))
-                .then(fetchedShows => setTvShows(fetchedShows))
-                .catch(error => console.error(error));
-        } catch (error) {
-            console.error(error);
-        }
-        setIsLoading(false);
+        Promise.all(showStorage.showIds.map(showId => getTvShow(showId)))
+            .then(fetchedShows => { setTvShows(fetchedShows); })
+            .catch(error => { console.error(error); })
+            .finally(() => { setIsLoading(false); });
     }, [showStorage]);
 
     const columns = useMemo<MRT_ColumnDef<TvShow>[]>(
