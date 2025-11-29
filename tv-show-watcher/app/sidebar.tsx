@@ -1,4 +1,7 @@
 import SideBarLink from "./SideBarLink";
+import HomeIcon from '@mui/icons-material/Home';
+import AddBoxIcon from '@mui/icons-material/AddBox';
+import InfoIcon from '@mui/icons-material/Info';
 
 export default function SideBar({ className = "", children }: { className?: string, children?: React.ReactNode }) {
     return (
@@ -10,9 +13,9 @@ export default function SideBar({ className = "", children }: { className?: stri
                 flex-grow-0
                 ${className}
             `}>
-            <SideBarLink href="/">Home</SideBarLink>
-            <SideBarLink href="/search">Add TV Show</SideBarLink>
-            <SideBarLink href="/about">About</SideBarLink>
+            <SideBarLink href="/"><HomeIcon/> Home</SideBarLink>
+            <SideBarLink href="/search"><AddBoxIcon/> Add TV Show</SideBarLink>
+            <SideBarLink href="/about"><InfoIcon/> About</SideBarLink>
             {children}
         </aside>
     )

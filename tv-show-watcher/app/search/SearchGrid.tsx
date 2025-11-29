@@ -12,6 +12,8 @@ import PrimaryButton from '../components/PrimaryButton';
 import TextArea from '../components/TextArea';
 import ShowStorage from '../interfaces/showStorage';
 import Image from 'next/image';
+import SearchIcon from '@mui/icons-material/Search';
+import AddIcon from '@mui/icons-material/Add';
 
 export default function SearchGrid({ className = "", children }: { className?: string, children?: React.ReactNode }) {
     const [search, setSearch] = useState<string>("");
@@ -92,10 +94,10 @@ export default function SearchGrid({ className = "", children }: { className?: s
                             handleSearch();
                         }
                     }} />
-                <PrimaryButton onClick={handleSearch}>Search</PrimaryButton>
+                <PrimaryButton className="self-start gap-2" onClick={handleSearch}><SearchIcon /> Search</PrimaryButton>
             </form>
             <MaterialReactTable table={table} />
-            <PrimaryButton className="self-start" onClick={handleAdd}>Add</PrimaryButton>
+            <PrimaryButton className="self-start gap-2" onClick={handleAdd} disabled={table.getSelectedRowModel().rows.length === 0}><AddIcon /> Add</PrimaryButton>
         </div>
     );
 }
