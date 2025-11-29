@@ -72,9 +72,8 @@ export default function About() {
         return `${window.location.origin}${process.env.BASE_PATH || ""}/share?config=${encoded}`;
     }
 
-    const exportUrl = exportConfigToUrl();
-
     function copyToClipboard() {
+        const exportUrl = exportConfigToUrl();
         navigator.clipboard.writeText(exportUrl);
         setInfoMessage("Configuration URL copied to clipboard!");
     }
