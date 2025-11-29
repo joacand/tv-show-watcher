@@ -69,7 +69,14 @@ export default function About() {
         const config = getConfig();
         const json = JSON.stringify(config);
         const encoded = encodeURIComponent(btoa(json));
-        return `${window.location.origin}${process.env.BASE_PATH || ""}/share?config=${encoded}`;
+
+        const url = new URL(window.location.href);
+        const paths = url.pathname.split('/').filter(Boolean);
+        paths.pop();
+        url.pathname = paths.join('/') + '/share';
+        url.search = `config=${encoded}`;
+
+        return url.toString();
     }
 
     function copyToClipboard() {
