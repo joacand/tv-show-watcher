@@ -1,61 +1,57 @@
 'use client';
 import { createTheme } from '@mui/material/styles';
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#1D7CA2',
+const theme = createTheme({
+  colorSchemes: {
+    dark: {
+      palette: {
+        mode: 'dark',
+        primary: {
+          light: '#009bb2',
+          main: '#1D7CA2',
+          dark: '#3f79ae',
+          contrastText: '#fff',
+        },
+        divider: '#979797ff',
+      },
     },
-    secondary: {
-      main: '#f48fb1',
+    light: {
+      palette: {
+        mode: 'light',
+        primary: {
+          light: '#5fc4d4',
+          main: '#1D7CA2',
+          dark: '#145a70',
+          contrastText: '#fff',
+        },
+        divider: '#b0b0b0',
+        background: {
+          default: '#f5f5f5',
+          paper: '#ffffff',
+        },
+        text: {
+          primary: '#3a3a3aff',
+          secondary: '#252525ff',
+        },
+      },
     },
-    background: {
-      default: '#1D1D1D',
-    },
-    text: {
-      primary: '#e0e0e0',
-      secondary: '#b0b0b0',
-    },
-    divider: '#373737',
   },
   typography: {
     fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
   },
   components: {
-    MuiButton: {
-      styleOverrides: {
-        containedPrimary: {
-          color: '#e0e0e0',
-        },
-      },
-    },
     MuiTableCell: {
       styleOverrides: {
         head: {
-          color: '#eeeeeeff',
           fontWeight: 600,
           fontSize: '1.0rem', // smaller/larger header text
         },
         body: {
           fontSize: '1.0rem', // body text size
-          color: '#eeeeeeff',
-        },
-      },
-    },
-    MuiTableRow: {
-      styleOverrides: {
-        root: {
-          '&:hover': {
-            backgroundColor: '#2a2b2f',
-          },
-          '&.Mui-selected': {
-            backgroundColor: '#0022ffff !important',
-          },
         },
       },
     },
   },
 });
 
-export default darkTheme;
+export default theme;
