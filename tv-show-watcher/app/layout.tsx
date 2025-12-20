@@ -33,10 +33,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Providers>
-          <div className="
-            flex flex-col items-stretch
-            p-[10px] w-full h-screen
-            relative">
+          <div className="flex flex-col items-stretch p-[10px] w-full h-screen relative">
             <Header />
             <div className="flex flex-1 w-full">
               <SideBar className="" />

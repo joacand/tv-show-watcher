@@ -1,8 +1,8 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  basePath: process.env.BASE_PATH || "",
-  assetPrefix: process.env.ASSET_PATH || "",
+  basePath: process.env.NEXT_PUBLIC_BASE_PATH || "",
+  assetPrefix: process.env.NEXT_PUBLIC_ASSET_PATH || "",
   output: "export",
   trailingSlash: true,
   images: {

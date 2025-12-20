@@ -89,7 +89,7 @@ export default function About() {
         <>
             <div className="font-sans font-medium text-[16px] leading-[26px] flex-none order-1 gap-4 flex flex-col">
                 <p>Welcome to <strong>TV Show Watcher</strong>!</p>
-                <p>With this application you can see upcoming episodes of your favorite TV shows in one place. Simply add the shows you like in <Href href={`${process.env.BASE_PATH || ""}${"/search"}`}>Search</Href> and then navigate to the <Href href={`${process.env.BASE_PATH || ""}${"/"}`}>Home page</Href>.</p>
+                <p>With this application you can see upcoming episodes of your favorite TV shows in one place. Simply add the shows you like in <Href href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}${"/search"}`}>Search</Href> and then navigate to the <Href href={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}${"/"}`}>Home page</Href>.</p>
                 <p>API provided by <Href href="https://www.tvmaze.com/api">TV Maze</Href>.</p>
                 <p>You can use the below buttons to export or import your TV shows:</p>
                 <div className="gap-4 flex">
