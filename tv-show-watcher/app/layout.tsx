@@ -7,9 +7,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-import theme from "./theme";
+import Providers from "./Providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,13 +30,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`} suppressHydrationWarning
-      >
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          
+    <html lang="en">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        <Providers>
           <div className="
             flex flex-col items-stretch
             p-[10px] w-full h-screen
@@ -51,7 +45,7 @@ export default function RootLayout({
               </main>
             </div>
           </div>
-        </ThemeProvider>
+        </Providers>
       </body>
     </html>
   );

@@ -57,6 +57,7 @@ export default function TvGrid({ className = "", children }: { className?: strin
                 header: 'Episode',
                 enableColumnDragging: false,
                 grow: false,
+                enableSorting: false,
             },
             {
                 accessorKey: 'latestEpisode',
@@ -68,6 +69,7 @@ export default function TvGrid({ className = "", children }: { className?: strin
                     </span>
                 ),
                 grow: false,
+                sortDescFirst: false,
             },
             {
                 accessorKey: 'nextEpisode',
@@ -75,10 +77,11 @@ export default function TvGrid({ className = "", children }: { className?: strin
                 enableColumnDragging: false,
                 Cell: ({ cell }) => (
                     <span>
-                        {cell.getValue<number>() === -99999 ? "N/A" : `${cell.getValue<number>()} day${cell.getValue<number>() === 1 ? "" : "s"}`}
+                        {cell.getValue<number>() === 99999 ? "N/A" : `${cell.getValue<number>()} day${cell.getValue<number>() === 1 ? "" : "s"}`}
                     </span>
                 ),
                 grow: false,
+                sortDescFirst: false,
             },
         ],
         [],

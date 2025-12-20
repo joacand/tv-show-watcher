@@ -54,7 +54,7 @@ async function MapToTvShow(json: Show): Promise<TvShow> {
     }
 
     const nextEpisodeDate = nextEpisode ? nextEpisode.airdate : null;
-    let nextDiffDays = -99999;
+    let nextDiffDays = 99999;
     if (nextEpisodeDate) {
         const nextDate = new Date(nextEpisodeDate);
         const today = new Date();
