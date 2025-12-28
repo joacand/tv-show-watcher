@@ -21,7 +21,22 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "TV Show Watcher",
-  description: "Keep track of your favorite TV shows",
+  description: "Subscribe to your favorite TV shows, track upcoming episodes, and stay updated with the latest releases.",
+  keywords: [
+    "TV shows",
+    "track TV series",
+    "favorite shows",
+    "TV show tracker",
+    "upcoming episodes",
+    "TV series subscriptions"
+  ],
+  authors: [{ name: "joacand" }],
+  robots: "index, follow",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
 };
 
 export default function RootLayout({
@@ -37,7 +52,7 @@ export default function RootLayout({
             <Header />
             <div className="flex flex-1 w-full">
               <SideBar className="" />
-              <main className="flex-1 p-6 max-w-300">
+              <main className="flex-1 p-6 max-w-300" role="main">
                 {children}
               </main>
             </div>
