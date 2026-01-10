@@ -87,14 +87,14 @@ export default function SearchGrid({ className = "", children }: { className?: s
                     e.preventDefault();
                     handleSearch();
                 }}>
-                <TextArea autoFocus placeholder="Enter TV Show..." value={search} onChange={handleChange}
+                <TextArea autoFocus required placeholder="Enter TV Show..." value={search} onChange={handleChange}
                     onKeyDown={(e) => {
                         if (e.key === "Enter") {
                             e.preventDefault();
                             handleSearch();
                         }
                     }} />
-                <PrimaryButton className="self-start gap-2" onClick={handleSearch}><SearchIcon /> Search</PrimaryButton>
+                <PrimaryButton className="self-start gap-2" type="submit"><SearchIcon />Search</PrimaryButton>
             </form>
             <MaterialReactTable table={table} />
             <PrimaryButton className="self-start gap-2" onClick={handleAdd} disabled={table.getSelectedRowModel().rows.length === 0}><AddIcon /> Add</PrimaryButton>
